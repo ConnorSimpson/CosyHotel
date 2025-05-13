@@ -13,7 +13,7 @@ namespace Drawing.Common
         #region private members
 
         private ContentManager content;
-        private CustomSpriteBatch spriteBatch;
+        private SpriteBatch spriteBatch;
         private SpriteFont font;
 
         private Texture2D button;
@@ -38,7 +38,7 @@ namespace Drawing.Common
         /// <param name="graphics">graphics</param>
         /// <param name="content">content</param>
         /// <param name="spriteBatch">batch</param>
-        public ButtonBase(string label, int width, int height, bool surroundHover, Texture2D button, Texture2D hover, ContentManager content, CustomSpriteBatch spriteBatch)
+        public ButtonBase(string label, int width, int height, bool surroundHover, Texture2D button, Texture2D hover, ContentManager content, SpriteBatch spriteBatch)
         {
             this.content = content;
             this.spriteBatch = spriteBatch;
@@ -84,14 +84,7 @@ namespace Drawing.Common
         ///<inheritdoc/>
         public bool InBounds(int x, int y)
         {
-            float scaleX = (float)spriteBatch.RenderDestination.Width / spriteBatch.GraphicsDevice.DisplayMode.Width;
-            float scaleY = (float)spriteBatch.RenderDestination.Height / spriteBatch.GraphicsDevice.DisplayMode.Height;
-            float scale = Math.Min(scaleX, scaleY);
-
-            var xAddional = spriteBatch.RenderDestination.X;
-            var yAddional = spriteBatch.RenderDestination.Y;
-
-            return x - xAddional >= (locationX * scaleX) && x - xAddional <= (locationX * scaleX) + (width * scaleX) && y - yAddional >= (locationY * scaleY) && y - yAddional <= (locationY * scaleY) + (height * scaleY);
+            return x  >= (locationX) && x <= (locationX ) + (width) && y >= (locationY) && y <= (locationY) + (height);
         }
 
         ///<inheritdoc/>

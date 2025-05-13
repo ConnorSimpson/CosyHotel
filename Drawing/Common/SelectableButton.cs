@@ -12,7 +12,7 @@ namespace Drawing.Common
         private bool selected = false;
 
         private readonly Texture2D buttonSelect;
-        private readonly CustomSpriteBatch spriteBatch;
+        private readonly SpriteBatch spriteBatch;
 
         private readonly int width;
         private readonly int height;
@@ -24,7 +24,7 @@ namespace Drawing.Common
         /// </summary>
         public bool IsSelected => selected;
 
-        public SelectableButton(int width, int height, Texture2D button, Texture2D buttonHover, Texture2D buttonSelect, GraphicsDeviceManager graphics, ContentManager content, CustomSpriteBatch spriteBatch)
+        public SelectableButton(int width, int height, Texture2D button, Texture2D buttonHover, Texture2D buttonSelect, GraphicsDeviceManager graphics, ContentManager content, SpriteBatch spriteBatch)
             : base("", width, height, false, button, buttonHover, content, spriteBatch)
         {
             this.buttonSelect = buttonSelect;

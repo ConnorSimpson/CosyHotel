@@ -27,6 +27,7 @@
     <ProjectReference Include="..\..\Tools\Tools.csproj" />
     <ProjectReference Include="..\Drawing\Drawing.csproj" />
     <ProjectReference Include="..\GameState\GameState.csproj" />
+    <ProjectReference Include="..\MapBuilder\MapBuilder.csproj" />
     <ProjectReference Include="..\ScreenHandling\ScreenHandling.csproj" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">

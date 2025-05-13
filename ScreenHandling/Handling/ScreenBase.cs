@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Tools;
+using Microsoft.Xna.Framework.Graphics;
+using ScreenHandling;
 
 namespace Screens.Handling
 {
@@ -13,7 +14,7 @@ namespace Screens.Handling
 
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
-        protected CustomSpriteBatch spriteBatch;
+        protected SpriteBatch spriteBatch;
 
         #endregion
 
@@ -49,13 +50,16 @@ namespace Screens.Handling
 
         public ContentManager content;
 
-        public CustomSpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
 
-        public ScreenRequirements(GraphicsDeviceManager graphics, ContentManager content, CustomSpriteBatch spriteBatch)
+        public Camera Camera;
+
+        public ScreenRequirements(GraphicsDeviceManager graphics, ContentManager content, SpriteBatch spriteBatch, Camera camera)
         {
             this.graphics = graphics;
             this.content = content;
             this.spriteBatch = spriteBatch;
+            this.Camera = camera;
         }
     }
 }

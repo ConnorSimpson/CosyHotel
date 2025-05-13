@@ -5,6 +5,7 @@ using GameState.Information;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ScreenHandling;
 using Screens.Handling;
 using Screens.Menus;
 using Tools;
@@ -16,10 +17,12 @@ namespace CosyHotel
         #region private members
 
         private GraphicsDeviceManager graphics;
-        private CustomSpriteBatch spriteBatch;
+        private SpriteBatch spriteBatch;
         private MainScreenManager mainScreenHandler;
+        private Camera camera;
 
         private RenderTarget2D renderTarget;
+        private Rectangle renderDestination;
 
         #endregion
 
@@ -42,11 +45,11 @@ namespace CosyHotel
             float scaleY = (float)size.Y / renderTarget.Height;
             float scale = Math.Min(scaleX, scaleY);
 
-            spriteBatch.RenderDestination.Width = (int)(renderTarget.Width * scale);
-            spriteBatch.RenderDestination.Height = (int)(renderTarget.Height * scale);
+            renderDestination.Width = (int)(renderTarget.Width * scale);
+            renderDestination.Height = (int)(renderTarget.Height * scale);
 
-            spriteBatch.RenderDestination.X = (size.X - spriteBatch.RenderDestination.Width) / 2;
-            spriteBatch.RenderDestination.Y = (size.Y - spriteBatch.RenderDestination.Height) / 2;
+            renderDestination.X = (size.X - renderDestination.Width) / 2;
+            renderDestination.Y = (size.Y - renderDestination.Height) / 2;
         }
 
         #region protected methods
@@ -57,8 +60,6 @@ namespace CosyHotel
             graphics.IsFullScreen = false;
             graphics.PreferredBackBufferWidth = Constants.Native_Width;
             graphics.PreferredBackBufferHeight = Constants.Native_Height;
-            //graphics.PreferredBackBufferWidth = 640;
-            //GameBase.Native_Height = 480;
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -66,12 +67,14 @@ namespace CosyHotel
 
         protected override void LoadContent()
         {
-            spriteBatch = new CustomSpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             renderTarget = new RenderTarget2D(GraphicsDevice, Constants.Native_Width, Constants.Native_Height);
+            camera = new Camera(graphics.GraphicsDevice.Viewport);
+            camera.WorldBounds = new Rectangle(0, 0, 1920, 1080);
 
             CalculateRenderDestination();
 
-            var screenRequirements = new ScreenRequirements(graphics, Content, spriteBatch);
+            var screenRequirements = new ScreenRequirements(graphics, Content, spriteBatch, camera);
             var mainMenu = new MainMenu(screenRequirements);
             var settingsMenu = new SettingsMenu(new Action(CalculateRenderDestination), Window, screenRequirements);
 
@@ -107,7 +110,7 @@ namespace CosyHotel
             GraphicsDevice.SetRenderTarget(null);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(renderTarget, spriteBatch.RenderDestination, Color.White);
+            spriteBatch.Draw(renderTarget, renderDestination, Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

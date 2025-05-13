@@ -24,7 +24,7 @@ namespace Drawing.Common
         /// <param name="graphics"><inheritdoc/></param>
         /// <param name="content"><inheritdoc/></param>
         /// <param name="spriteBatch"><inheritdoc/></param>
-        public MenuButton(string label, EventHandler clickEvent, GraphicsDeviceManager graphics, ContentManager content, CustomSpriteBatch spriteBatch)
+        public MenuButton(string label, EventHandler clickEvent, GraphicsDeviceManager graphics, ContentManager content, SpriteBatch spriteBatch)
             : base(label, 100, 50, true, content.Load<Texture2D>("GUI/Button"), content.Load<Texture2D>("GUI/ButtonHover"), content, spriteBatch)
         {
             this.clickEvent = clickEvent;

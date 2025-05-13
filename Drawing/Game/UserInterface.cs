@@ -17,7 +17,7 @@ namespace Drawing.Drawing
         #region private members
 
         private ContentManager content;
-        private CustomSpriteBatch spriteBatch;
+        private SpriteBatch spriteBatch;
         private GraphicsDeviceManager graphics;
         private GameInformation gameInfo;
 
@@ -34,7 +34,7 @@ namespace Drawing.Drawing
         /// <param name="graphics">graphics</param>
         /// <param name="content">content</param>
         /// <param name="spriteBatch">spriteBatch</param>
-        public UserInterface(GameInformation gameInfo, GraphicsDeviceManager graphics, ContentManager content, CustomSpriteBatch spriteBatch)
+        public UserInterface(GameInformation gameInfo, GraphicsDeviceManager graphics, ContentManager content, SpriteBatch spriteBatch)
         {
             this.graphics = graphics;
             this.content = content;
